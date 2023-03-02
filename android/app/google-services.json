@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "43055354607",
+    "project_id": "gradproj-37b92",
+    "storage_bucket": "gradproj-37b92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43055354607:android:f500bcbc1a9ad06a74c11a",
+        "android_client_info": {
+          "package_name": "com.example.grad_proj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43055354607-67tuefold6104lslbcnr5me1sf29ihv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrSijEmng3thRKVwNPyQHvqUYhsmxcZ4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43055354607-67tuefold6104lslbcnr5me1sf29ihv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
