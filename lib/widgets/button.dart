@@ -33,7 +33,7 @@ class Button extends StatelessWidget {
             width: size.width / width,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(.1),
+              color: Colors.purple.shade300.withOpacity(0.9),
               borderRadius: BorderRadius.circular(15),
             ),
             child: Text(

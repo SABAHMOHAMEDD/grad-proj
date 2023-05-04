@@ -34,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-              backgroundColor: Colors.blueGrey
+              backgroundColor: Colors.white
               //Color(0xff192028),
               ,
               body: SingleChildScrollView(
@@ -49,18 +49,12 @@ class SignUpScreen extends StatelessWidget {
                             child: Text(
                               'Sign Up',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(.7),
+                                color: Colors.purple.shade300.withOpacity(0.9),
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1,
                                 wordSpacing: 4,
                               ),
-                            ),
-                          ),
-                          Container(
-                            height: 70,
-                            child: Image(
-                              image: AssetImage('assets/images/image (1).png'),
                             ),
                           ),
                           Column(
@@ -85,7 +79,7 @@ class SignUpScreen extends StatelessWidget {
                                 height: 54,
                                 width: size.width / 1.2,
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(.1),
+                                  color: Colors.purple.shade300.withOpacity(.9),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Directionality(

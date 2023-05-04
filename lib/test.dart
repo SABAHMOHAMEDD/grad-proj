@@ -1,184 +1,58 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class Otp extends StatefulWidget {
-  const Otp({Key key}) : super(key: key);
-
+class MyCarousel extends StatefulWidget {
   @override
-  _OtpState createState() => _OtpState();
+  _MyCarouselState createState() => _MyCarouselState();
 }
 
-class _OtpState extends State<Otp> {
+class _MyCarouselState extends State<MyCarousel> {
+  final List<String> images = [
+    'https://img.freepik.com/free-vector/people-walking-sitting-hospital-building-city-clinic-glass-exterior-flat-vector-illustration-medical-help-emergency-architecture-healthcare-concept_74855-10130.jpg?w=1060&t=st=1683156704~exp=1683157304~hmac=fc24c59132050890477b36063ee82d87b2c1da7f9c84830d9796516eab618098',
+    'https://img.freepik.com/free-vector/healthcare-background-with-medical-symbols-hexagonal-frame_1017-26363.jpg?w=1060&t=st=1683156757~exp=1683157357~hmac=36700c952e27f97becaa9927fe5fedd9509cd08bfe2b283bf3e4235218917b51',
+    'https://img.freepik.com/free-vector/flat-hand-drawn-hospital-reception-scene_52683-54613.jpg?w=996&t=st=1683156795~exp=1683157395~hmac=81354c782e3b1b77b2542261a93bdac1e86cb955e35b34369ea1826dba8ddbbf',
+  ];
+
+  int _current = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: Colors.black54,
+    return Column(
+      children: [
+        CarouselSlider(
+          items: images.map((image) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  width: double.infinity,
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(
-                  'assets/images/illustration-3.png',
-                ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                'Verification',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Enter your OTP code number",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 28,
-              ),
-              Container(
-                padding: EdgeInsets.all(28),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _textFieldOTP(first: true, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: true),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 22,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.purple),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(14.0),
-                          child: Text(
-                            'Verify',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Didn't you receive any code?",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Resend New Code",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+                );
+              },
+            );
+          }).toList(),
+          options: CarouselOptions(
+            padEnds: true,
+            height: 200,
+            viewportFraction: 1,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(seconds: 1),
+            reverse: false,
+            autoPlayCurve: Curves.fastOutSlowIn,
+            onPageChanged: (index, reason) {
+              setState(() {
+                _current = index;
+              });
+            },
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _textFieldOTP({bool first, last}) {
-    return Container(
-      height: 85,
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: TextField(
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context).nextFocus();
-            }
-            if (value.length == 0 && first == false) {
-              FocusScope.of(context).previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          keyboardType: TextInputType.number,
-          maxLength: 1,
-          decoration: InputDecoration(
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.purple),
-                borderRadius: BorderRadius.circular(12)),
-          ),
-        ),
-      ),
+        SizedBox(height: 16),
+      ],
     );
   }
 }

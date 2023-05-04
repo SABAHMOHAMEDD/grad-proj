@@ -33,12 +33,12 @@ class EditTextField extends StatelessWidget {
           sigmaX: 15,
         ),
         child: Container(
-          height: size.width / 8,
+          height: size.width / 7,
           width: size.width / 1.2,
           alignment: Alignment.center,
           padding: EdgeInsets.only(right: size.width / 30),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(.1),
+            color: Colors.purple.shade300.withOpacity(0.9),
             borderRadius: BorderRadius.circular(15),
           ),
           child: TextField(

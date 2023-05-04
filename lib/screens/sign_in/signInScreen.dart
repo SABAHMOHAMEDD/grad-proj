@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../const/const.dart';
-import '../../home/home_screen.dart';
+import '../../home/homeScreen.dart';
 import '../../widgets/button.dart';
 import '../../widgets/text_field.dart';
 import '../sign_up/signUpScreen.dart';
@@ -36,7 +36,7 @@ class SignInScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.blueGrey
+            backgroundColor: Colors.white
             //Color(0xff192028),
             ,
             body: SingleChildScrollView(
@@ -49,15 +49,6 @@ class SignInScreen extends StatelessWidget {
                         SizedBox(
                           height: 120,
                         ),
-                        Expanded(
-                            flex: 2,
-                            child: Container(
-                              height: 200,
-                              child: Image(
-                                image:
-                                    AssetImage('assets/images/image (1).png'),
-                              ),
-                            )),
                         Expanded(
                           flex: 4,
                           child: Column(
@@ -96,8 +87,7 @@ class SignInScreen extends StatelessWidget {
                                       SignInCubit.get(context).userLogin(
                                           email: emailController.text,
                                           password: passwordController.text);
-                                      navigateToReplacement(
-                                          context, HomeScreen());
+                                      navigateToReplacement(context, Home());
                                     },
                                   ),
                                   SizedBox(width: size.width / 20),
