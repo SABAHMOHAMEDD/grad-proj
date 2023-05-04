@@ -68,7 +68,7 @@ class Home extends StatelessWidget {
                   ),
                   InkWell(
                       onTap: () {
-                        navigateToReplacement(context, HospitalHome());
+                        navigateToReplacement(context, HospitalHome(uId: 'er3slW6BLMb0ZSS6oM9s',));
                       },
                       child: MyBox(
                         imagePath: 'assets/images/hospital.png',

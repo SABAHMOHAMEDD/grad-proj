@@ -5,11 +5,12 @@ class UserModel {
   String? uId;
   String? NId;
   DateTime? DOB;
+  String? uImage;
 
   //String? image;
   // bool? isEmailVerified;
 
-  UserModel({this.name, this.email, this.phone, this.uId, this.NId, this.DOB
+  UserModel({this.name, this.email, this.phone, this.uId, this.NId, this.DOB , this.uImage
       //this.bio,
       //this.cover,
       // this.image,
@@ -24,6 +25,7 @@ class UserModel {
           uId: json['uId'],
           NId: json['NId'],
           DOB: json['DOB'],
+          uImage: json['uImage'],
           //bio: json['bio'],
           //cover: json['cover'],
           //image: json['image'],
@@ -38,6 +40,7 @@ class UserModel {
       'uId': uId,
       'NId': NId,
       'DOB': DOB,
+      'uImage': uImage,
       //'bio': bio,
       //'cover': cover,
       //'image': image,
