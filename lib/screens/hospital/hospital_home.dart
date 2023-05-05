@@ -26,204 +26,141 @@ class HospitalHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HospitalCubit()..getHospital(uId: uId),
-      child: BlocConsumer<HospitalCubit, HospitalStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            HospitalCubit cubit = HospitalCubit.get(context);
-            return ConditionalBuilder(
-              condition: cubit.hospital != null,
-              builder: (context) => Scaffold(
-                backgroundColor: Colors.grey.shade100,
-                // appBar: AppBar(
-                //     backgroundColor: Colors.transparent,
-                //     shadowColor: Colors.transparent,
-                //     actions: [
-                //       Container(child: Image.network(cubit.hospital!.logo!)),
-                //     ]),
-                floatingActionButton: FloatingActionButton(
-                    backgroundColor: Color(0xFFf08986),
-                    child: const FaIcon(FontAwesomeIcons.robot),
-                    onPressed: () {
-                      navigateTo(
-                          context,
-                          ChatScreen(
-                            serviceId: uId,
-                            ctx: context,
-                          ));
-                    }),
+    return Builder(
+      builder: (context) {
+        HospitalCubit.get(context).getHospital(uId: uId);
+        return BlocConsumer<HospitalCubit, HospitalStates>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              HospitalCubit cubit = HospitalCubit.get(context);
+              return ConditionalBuilder(
+                condition: cubit.hospital != null,
+                builder: (context) => Scaffold(
+                  backgroundColor: Colors.grey.shade100,
+                  // appBar: AppBar(
+                  //     backgroundColor: Colors.transparent,
+                  //     shadowColor: Colors.transparent,
+                  //     actions: [
+                  //       Container(child: Image.network(cubit.hospital!.logo!)),
+                  //     ]),
+                  floatingActionButton: FloatingActionButton(
+                      backgroundColor: const Color(0xFFf08986),
+                      child: const FaIcon(FontAwesomeIcons.robot),
+                      onPressed: () {
+                        navigateTo(
+                            context,
+                            ChatScreen(
+                              serviceId: uId,
+                              ctx: context,
+                            ));
+                      }),
 
-                bottomNavigationBar: BottomNavigationBar(
-                  fixedColor: Color(0xFF56a89c),
-                  //   currentIndex: _currentIndex,
-                  type: BottomNavigationBarType.fixed,
-                  items: const [
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      label: 'Home',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.search),
-                      label: 'Search',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.favorite),
-                      label: 'Favorite',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.person),
-                      label: 'Profile',
-                    ),
-                  ],
-                  onTap: (index) {
-                    // setState(() {
-                    // _currentIndex = index;
-                    // });
-                  },
-                ),
-
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            stops: [0.1, 0.5],
-                            colors: [
-                              Color(0xFF56a89c).withOpacity(0.9),
-                              Color(0xFF56a89c).withOpacity(0.8),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(50),
-                              bottomRight: Radius.circular(0)),
-                        ),
-                        width: double.infinity,
-                        height: 200,
+                  bottomNavigationBar: BottomNavigationBar(
+                    fixedColor: const Color(0xFF56a89c),
+                    //   currentIndex: _currentIndex,
+                    type: BottomNavigationBarType.fixed,
+                    items: const [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.home),
+                        label: 'Home',
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 12,
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.search),
+                        label: 'Search',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.favorite),
+                        label: 'Favorite',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.person),
+                        label: 'Profile',
+                      ),
+                    ],
+                    onTap: (index) {
+                      // setState(() {
+                      // _currentIndex = index;
+                      // });
+                    },
+                  ),
+
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: [0.1, 0.5],
+                              colors: [
+                                const Color(0xFF56a89c).withOpacity(0.9),
+                                const Color(0xFF56a89c).withOpacity(0.8),
+                              ],
                             ),
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+                            borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(50),
+                                ),
+                          ),
+                          width: double.infinity,
+                          height: 200,
+                          child: Image.network(cubit.hospital!.logo!,),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 12,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  MyTitles(title: 'Quick access'),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Container(
-                                    height: 220,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
-                                      child: GridView.count(
-                                        childAspectRatio: 1 / 0.6,
-                                        crossAxisCount: 2,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              navigateToReplacement(context,
-                                                  DiseasesCategories());
-                                            },
-                                            child: MyBox2(
-                                              imagePath:
-                                                  'assets/images/clinic.png',
-                                              title: 'Clinic Visit',
-                                            ),
-                                          ),
-                                          MyBox2(
-                                            imagePath:
-                                                'assets/images/video-call.png',
-                                            title: 'Doctor Call',
-                                          ),
-                                          MyBox2(
-                                            imagePath:
-                                                'assets/images/pharmacy.png',
-                                            title: 'Pharmacy',
-                                          ),
-                                          MyBox2(
-                                            imagePath:
-                                                'assets/images/doctor (2).png',
-                                            title: 'Home Visit',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    MyTitles(title: 'Search'),
-                                    SizedBox(
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    MyTitles(title: 'Quick access'),
+                                    const SizedBox(
                                       height: 8,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                    Container(
+                                      height: 220,
+                                      child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 20),
-                                        height: 54,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            // color: Colors.purple.shade50.withOpacity(0.9),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  offset: const Offset(2, 2),
-                                                  blurRadius: 4,
-                                                  color: Colors.blueGrey
-                                                      .withOpacity(0.23))
-                                            ]),
-                                        child: Row(
+                                        child: GridView.count(
+                                          childAspectRatio: 1 / 0.6,
+                                          crossAxisCount: 2,
                                           children: [
-                                            Expanded(
-                                              child: TextField(
-                                                onChanged: (value) {},
-                                                decoration: InputDecoration(
-                                                    hintText:
-                                                        'Doctors,Diseases....',
-                                                    hintStyle: TextStyle(
-                                                        color: Colors.black54),
-                                                    enabledBorder:
-                                                        InputBorder.none,
-                                                    focusedBorder:
-                                                        InputBorder.none),
+                                            InkWell(
+                                              onTap: () {
+                                                navigateTo(context, DiseasesCategories());
+                                              },
+                                              child: MyBox2(
+                                                imagePath:
+                                                    'assets/images/clinic.png',
+                                                title: 'Clinic Visit',
                                               ),
                                             ),
-                                            SvgPicture.asset(
-                                              'assets/icons/search.svg',
-                                              color: Color(0xFF56a89c),
+                                            MyBox2(
+                                              imagePath:
+                                                  'assets/images/video-call.png',
+                                              title: 'Doctor Call',
+                                            ),
+                                            MyBox2(
+                                              imagePath:
+                                                  'assets/images/pharmacy.png',
+                                              title: 'Pharmacy',
+                                            ),
+                                            MyBox2(
+                                              imagePath:
+                                                  'assets/images/doctor (2).png',
+                                              title: 'Home Visit',
                                             ),
                                           ],
                                         ),
@@ -232,101 +169,166 @@ class HospitalHome extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+                              const SizedBox(
+                                height: 12,
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MyTitles(title: 'ChatBOT'),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Container(
-                                      color: Colors.white,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            'Ask For\nANYTHING...',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black54),
-                                          ),
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    Color(0xFF56a89c)),
-                                            child: Text(
-                                              'Start Chatting',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            onPressed: () {},
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Card(
+                              Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      MyTitles(title: 'Categories'),
-                                      SizedBox(
+                                      MyTitles(title: 'Search'),
+                                      const SizedBox(
                                         height: 8,
                                       ),
-                                      SizedBox(
-                                          height: 120,
-                                          child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: catPath.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return CategoriesWidget(
-                                                  catPath: catPath,
-                                                  index: index,
-                                                  catTitle: catTitle,
-                                                );
-                                              })),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          height: 54,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              // color: Colors.purple.shade50.withOpacity(0.9),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    offset: const Offset(2, 2),
+                                                    blurRadius: 4,
+                                                    color: Colors.blueGrey
+                                                        .withOpacity(0.23))
+                                              ]),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: TextField(
+                                                  onChanged: (value) {},
+                                                  decoration: const InputDecoration(
+                                                      hintText:
+                                                          'Doctors,Diseases....',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.black54),
+                                                      enabledBorder:
+                                                          InputBorder.none,
+                                                      focusedBorder:
+                                                          InputBorder.none),
+                                                ),
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/icons/search.svg',
+                                                color: const Color(0xFF56a89c),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                )),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      MyTitles(title: 'ChatBOT'),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        color: Colors.white,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            const Text(
+                                              'Ask For\nANYTHING...',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black54),
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      const Color(0xFF56a89c)),
+                                              child: const Text(
+                                                'Start Chatting',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              onPressed: () {},
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        MyTitles(title: 'Categories'),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        SizedBox(
+                                            height: 120,
+                                            child: ListView.builder(
+                                                scrollDirection: Axis.horizontal,
+                                                itemCount: catPath.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return CategoriesWidget(
+                                                    catPath: catPath,
+                                                    index: index,
+                                                    catTitle: catTitle,
+                                                  );
+                                                })),
+                                      ],
+                                    ),
+                                  )),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              fallback: (context) => const Scaffold(
-                  body: Center(child: CircularProgressIndicator())),
-            );
-          }),
+                fallback: (context) => const Scaffold(
+                    body: Center(child: CircularProgressIndicator())),
+              );
+            });
+      }
     );
   }
 }
@@ -349,7 +351,7 @@ class MyBox2 extends StatelessWidget {
           BoxShadow(
               offset: const Offset(2, 2),
               blurRadius: 4,
-              color: Color(0xFF56a89c).withOpacity(0.23))
+              color: const Color(0xFF56a89c).withOpacity(0.23))
         ],
         color: Colors.white,
         // color: Colors.purple.shade50.withOpacity(0.9),
@@ -362,7 +364,7 @@ class MyBox2 extends StatelessWidget {
               width: 50,
               height: 50,
               child: Image(image: AssetImage(imagePath))),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Padding(
@@ -370,7 +372,7 @@ class MyBox2 extends StatelessWidget {
             child: Text(
               title,
               style:
-                  TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
+                  const TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
               //style: TextStyle(color: Colors.white),
             ),
           )
@@ -419,8 +421,8 @@ class _MyCarouselState extends State<MyCarousel> {
             initialPage: 0,
             enableInfiniteScroll: true,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
-            autoPlayAnimationDuration: Duration(seconds: 1),
+            autoPlayInterval: const Duration(seconds: 3),
+            autoPlayAnimationDuration: const Duration(seconds: 1),
             reverse: false,
             autoPlayCurve: Curves.fastOutSlowIn,
             onPageChanged: (index, reason) {
@@ -430,7 +432,7 @@ class _MyCarouselState extends State<MyCarousel> {
             },
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -448,7 +450,7 @@ class CategoriesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 120,
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Card(
         color: Colors.white,
         child: Column(
@@ -458,12 +460,12 @@ class CategoriesWidget extends StatelessWidget {
                 width: 40,
                 height: 40,
                 child: Image(image: AssetImage(catPath[index]))),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               catTitle[index],
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black87,
                   fontWeight: FontWeight.w500),

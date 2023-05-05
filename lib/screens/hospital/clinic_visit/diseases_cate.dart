@@ -69,15 +69,20 @@ class DiseasesCategories extends StatelessWidget {
                 children: [
                   InkWell(
                       onTap: () {
-                        navigateToReplacement(context, DoctorsList());
+                        // navigateToReplacement(context, DoctorsList());
                       },
                       child: CategoriesWidget(
                         catPath: 'assets/images/mask.png',
                         catTitle: 'Infectious',
                       )),
-                  CategoriesWidget(
-                    catPath: 'assets/images/rash.png',
-                    catTitle: 'Skin',
+                  InkWell(
+                    onTap: (){
+                      navigateTo(context, DoctorsList());
+                    },
+                    child: CategoriesWidget(
+                      catPath: 'assets/images/rash.png',
+                      catTitle: 'Skin',
+                    ),
                   ),
                   CategoriesWidget(
                     catPath: 'assets/images/gastroenterology.png',

@@ -18,7 +18,7 @@ Widget defaultButton({
       width: width,
       child: MaterialButton(
         elevation: 0,
-        color: MyTheme.primaryColor,
+        color: background,
         onPressed: function,
         child: Text(
           isUpperCase ? text.toUpperCase() : text,
@@ -27,7 +27,7 @@ Widget defaultButton({
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: MyTheme.primaryColor),
+          color: background),
     );
 
 Widget defaultFormField(

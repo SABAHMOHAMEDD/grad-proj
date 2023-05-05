@@ -1,117 +1,70 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
+import 'package:grad_proj/screens/hospital/cubit/hospital_states.dart';
+import 'package:grad_proj/shared/components/components.dart';
+import 'package:grad_proj/widgets/doctor_list_item.dart';
+import 'package:sizer/sizer.dart';
 
 class DoctorsList extends StatelessWidget {
-  List imageUrl = ['', '', '', ''];
-  List title = ['kdkkd', 'kk', 'klkk'];
-  List subtitle = ['kkk', 'kkk', 'kkk'];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 100,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23),
-            child: Text(
-              'Doctors List',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Color(0xFF56a89c)),
-            ),
-          ),
-          const SizedBox(
-            height: 45,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: InkWell(
-                onTap: () {
-                  // Do something when the card is tapped
-                },
-                child: Container(
-                  width: double.infinity,
+    return Builder(
+      builder: (context) {
+        HospitalCubit cubit = HospitalCubit.get(context);
+        cubit.getDoctors(uId: cubit.serviceUid!);
+        return BlocConsumer<HospitalCubit,HospitalStates>(
+          listener: (context,state){
+
+          },
+          builder:(context,state) {
+            HospitalCubit cubit = HospitalCubit.get(context);
+            return Scaffold(
+              body: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              backgroundColor: Color(0xFF56a89c),
-                              radius: 40,
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'sabah',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Text(
+                        'Doctors List',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color(0xFF56a89c)),
+                      ),
+                      SizedBox(
+                        height: 45,
+                      ),
+                      ConditionalBuilder(
+                        condition: cubit.doctorsList != null,
+                        builder:(context)=> ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, i) {
+                              return DoctorListItem(doctor: cubit.doctorsList[i],);
+                            },
+                            separatorBuilder: (context, i) => SizedBox(
+                                  height: 10,
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  'kkkkkkkkk',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          'kkkkkkkkk',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          'kkkkkkkkk',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          'kkkkkkkkk',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
+                            itemCount: cubit.doctorsList.length),
+                        fallback: (context)=>Center(child: CircularProgressIndicator()),
+                      )
                     ],
                   ),
                 ),
               ),
-            ),
-          )
-        ],
-      ),
+            );
+          },
+        );
+      }
     );
   }
 }
@@ -149,7 +102,7 @@ class MyCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 title[index],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -159,7 +112,7 @@ class MyCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 subtitle[index],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                 ),
               ),
