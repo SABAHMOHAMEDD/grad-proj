@@ -39,9 +39,12 @@ class Home extends StatelessWidget {
                         focusedBorder: InputBorder.none),
                   ),
                 ),
-                SvgPicture.asset(
-                  'assets/icons/search.svg',
-                  color: Colors.purple.shade300,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset(
+                    'assets/icons/search.svg',
+                    color: Colors.purple.shade300,
+                  ),
                 ),
               ],
             ),

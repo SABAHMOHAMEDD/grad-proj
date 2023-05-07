@@ -26,310 +26,298 @@ class HospitalHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        HospitalCubit.get(context).getHospital(uId: uId);
-        return BlocConsumer<HospitalCubit, HospitalStates>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              HospitalCubit cubit = HospitalCubit.get(context);
-              return ConditionalBuilder(
-                condition: cubit.hospital != null,
-                builder: (context) => Scaffold(
-                  backgroundColor: Colors.grey.shade100,
-                  // appBar: AppBar(
-                  //     backgroundColor: Colors.transparent,
-                  //     shadowColor: Colors.transparent,
-                  //     actions: [
-                  //       Container(child: Image.network(cubit.hospital!.logo!)),
-                  //     ]),
-                  floatingActionButton: FloatingActionButton(
-                      backgroundColor: const Color(0xFFf08986),
-                      child: const FaIcon(FontAwesomeIcons.robot),
-                      onPressed: () {
-                        navigateTo(
-                            context,
-                            ChatScreen(
-                              serviceId: uId,
-                              ctx: context,
-                            ));
-                      }),
+    return Builder(builder: (context) {
+      HospitalCubit.get(context).getHospital(uId: uId);
+      return BlocConsumer<HospitalCubit, HospitalStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            HospitalCubit cubit = HospitalCubit.get(context);
+            return ConditionalBuilder(
+              condition: cubit.hospital != null,
+              builder: (context) => Scaffold(
+                backgroundColor: Colors.grey.shade100,
+                // appBar: AppBar(
+                //     backgroundColor: Colors.transparent,
+                //     shadowColor: Colors.transparent,
+                //     actions: [
+                //       Container(child: Image.network(cubit.hospital!.logo!)),
+                //     ]),
+                floatingActionButton: FloatingActionButton(
+                    backgroundColor: const Color(0xFFf08986),
+                    child: const FaIcon(FontAwesomeIcons.robot),
+                    onPressed: () {
+                      navigateTo(
+                          context,
+                          ChatScreen(
+                            serviceId: uId,
+                            ctx: context,
+                          ));
+                    }),
 
-                  bottomNavigationBar: BottomNavigationBar(
-                    fixedColor: const Color(0xFF56a89c),
-                    //   currentIndex: _currentIndex,
-                    type: BottomNavigationBarType.fixed,
-                    items: const [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.search),
-                        label: 'Search',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Favorite',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.person),
-                        label: 'Profile',
-                      ),
-                    ],
-                    onTap: (index) {
-                      // setState(() {
-                      // _currentIndex = index;
-                      // });
-                    },
-                  ),
+                bottomNavigationBar: BottomNavigationBar(
+                  fixedColor: const Color(0xFF56a89c),
+                  //   currentIndex: _currentIndex,
+                  type: BottomNavigationBarType.fixed,
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.search),
+                      label: 'Search',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite),
+                      label: 'Favorite',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person),
+                      label: 'Profile',
+                    ),
+                  ],
+                  onTap: (index) {
+                    // setState(() {
+                    // _currentIndex = index;
+                    // });
+                  },
+                ),
 
-                  body: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.1, 0.5],
-                              colors: [
-                                const Color(0xFF56a89c).withOpacity(0.9),
-                                const Color(0xFF56a89c).withOpacity(0.8),
-                              ],
-                            ),
-                            borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(50),
-                                ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: [0.1, 0.5],
+                            colors: [
+                              const Color(0xFF56a89c).withOpacity(0.9),
+                              const Color(0xFF56a89c).withOpacity(0.8),
+                            ],
                           ),
-                          width: double.infinity,
-                          height: 200,
-                          child: Image.network(cubit.hospital!.logo!,),
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(50),
+                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                        width: double.infinity,
+                        height: 215,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(
-                                height: 12,
+                                height: 120,
                               ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      // color: Colors.purple.shade50.withOpacity(0.9),
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            offset: const Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Colors.blueGrey
+                                                .withOpacity(0.23))
+                                      ]),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextField(
+                                          onChanged: (value) {},
+                                          decoration: const InputDecoration(
+                                              hintText: 'Doctors,Diseases....',
+                                              hintStyle: TextStyle(
+                                                  color: Colors.black54),
+                                              enabledBorder: InputBorder.none,
+                                              focusedBorder: InputBorder.none),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SvgPicture.asset(
+                                          'assets/icons/search.svg',
+                                          color: Color(0xFF56a89c),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Image.network(cubit.hospital!.logo!,),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  MyTitles(title: 'Quick access'),
+                                  Container(
+                                    height: 235,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: GridView.count(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        childAspectRatio: 1 / 0.6,
+                                        crossAxisCount: 2,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              navigateTo(context,
+                                                  DiseasesCategories());
+                                            },
+                                            child: MyBox2(
+                                              imagePath:
+                                                  'assets/images/clinic.png',
+                                              title: 'Clinic Visit',
+                                            ),
+                                          ),
+                                          MyBox2(
+                                            imagePath:
+                                                'assets/images/video-call.png',
+                                            title: 'Doctor Call',
+                                          ),
+                                          MyBox2(
+                                            imagePath:
+                                                'assets/images/pharmacy.png',
+                                            title: 'Pharmacy',
+                                          ),
+                                          MyBox2(
+                                            imagePath:
+                                                'assets/images/doctor (2).png',
+                                            title: 'Home Visit',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    MyTitles(title: 'Quick access'),
+                                    MyTitles(title: 'ChatBOT'),
                                     const SizedBox(
                                       height: 8,
                                     ),
                                     Container(
-                                      height: 220,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        child: GridView.count(
-                                          childAspectRatio: 1 / 0.6,
-                                          crossAxisCount: 2,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                navigateTo(context, DiseasesCategories());
-                                              },
-                                              child: MyBox2(
-                                                imagePath:
-                                                    'assets/images/clinic.png',
-                                                title: 'Clinic Visit',
-                                              ),
+                                      color: Colors.white,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          const Text(
+                                            'Ask about anything...',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.grey,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    const Color(0xFF56a89c)),
+                                            child: const Text(
+                                              'Start Chatting',
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
-                                            MyBox2(
-                                              imagePath:
-                                                  'assets/images/video-call.png',
-                                              title: 'Doctor Call',
-                                            ),
-                                            MyBox2(
-                                              imagePath:
-                                                  'assets/images/pharmacy.png',
-                                              title: 'Pharmacy',
-                                            ),
-                                            MyBox2(
-                                              imagePath:
-                                                  'assets/images/doctor (2).png',
-                                              title: 'Home Visit',
-                                            ),
-                                          ],
-                                        ),
+                                            onPressed: () {},
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Card(
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      MyTitles(title: 'Search'),
+                                      MyTitles(title: 'Categories'),
                                       const SizedBox(
                                         height: 8,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          height: 54,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              // color: Colors.purple.shade50.withOpacity(0.9),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    offset: const Offset(2, 2),
-                                                    blurRadius: 4,
-                                                    color: Colors.blueGrey
-                                                        .withOpacity(0.23))
-                                              ]),
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: TextField(
-                                                  onChanged: (value) {},
-                                                  decoration: const InputDecoration(
-                                                      hintText:
-                                                          'Doctors,Diseases....',
-                                                      hintStyle: TextStyle(
-                                                          color: Colors.black54),
-                                                      enabledBorder:
-                                                          InputBorder.none,
-                                                      focusedBorder:
-                                                          InputBorder.none),
-                                                ),
-                                              ),
-                                              SvgPicture.asset(
-                                                'assets/icons/search.svg',
-                                                color: const Color(0xFF56a89c),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      SizedBox(
+                                          height: 120,
+                                          child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: catPath.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return CategoriesWidget(
+                                                  catPath: catPath,
+                                                  index: index,
+                                                  catTitle: catTitle,
+                                                );
+                                              })),
                                     ],
                                   ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      MyTitles(title: 'ChatBOT'),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Container(
-                                        color: Colors.white,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Text(
-                                              'Ask For\nANYTHING...',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black54),
-                                            ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      const Color(0xFF56a89c)),
-                                              child: const Text(
-                                                'Start Chatting',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              onPressed: () {},
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        MyTitles(title: 'Categories'),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        SizedBox(
-                                            height: 120,
-                                            child: ListView.builder(
-                                                scrollDirection: Axis.horizontal,
-                                                itemCount: catPath.length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return CategoriesWidget(
-                                                    catPath: catPath,
-                                                    index: index,
-                                                    catTitle: catTitle,
-                                                  );
-                                                })),
-                                      ],
-                                    ),
-                                  )),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          ),
+                                )),
+                            const SizedBox(
+                              height: 0,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                fallback: (context) => const Scaffold(
-                    body: Center(child: CircularProgressIndicator())),
-              );
-            });
-      }
-    );
+              ),
+              fallback: (context) => const Scaffold(
+                  body: Center(child: CircularProgressIndicator())),
+            );
+          });
+    });
   }
 }
 
@@ -371,8 +359,10 @@ class MyBox2 extends StatelessWidget {
             padding: const EdgeInsets.all(0),
             child: Text(
               title,
-              style:
-                  const TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87.withOpacity(0.7),
+                  fontSize: 14),
               //style: TextStyle(color: Colors.white),
             ),
           )
@@ -465,10 +455,10 @@ class CategoriesWidget extends StatelessWidget {
             ),
             Text(
               catTitle[index],
-              style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87.withOpacity(0.7),
+                  fontSize: 15),
             ),
           ],
         ),

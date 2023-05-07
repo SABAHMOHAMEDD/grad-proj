@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/models/service_provider_model.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_states.dart';
@@ -43,5 +42,12 @@ class HospitalCubit extends Cubit<HospitalStates>{
        defToast(msg: onError.toString());
        emit(HospitalGetDoctorsErrorState());
      });
+  }
+
+  List<DoctorModel>? searchedList;
+  void searchDoctor({required String name}){
+    searchedList = doctorsList.where((element) => element.name!.contains(name)).toList();
+    emit(HospitalGetDoctorsSuccessState());
+
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../const/const.dart';
 import 'doctors_list.dart';
@@ -15,17 +14,19 @@ class DiseasesCategories extends StatelessWidget {
           SizedBox(
             height: 100,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 23),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 23),
             child: Text(
               'Select Category',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Colors.blueGrey),
+                color: Color(0xFF56a89c),
+
+              ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 45,
           ),
           Container(
@@ -47,17 +48,19 @@ class DiseasesCategories extends StatelessWidget {
                 Expanded(
                   child: TextField(
                     onChanged: (value) {},
-                    decoration: InputDecoration(
-                        hintText: 'search',
-                        hintStyle: TextStyle(color: Colors.blueGrey),
+                    decoration: const InputDecoration(
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.w500),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none),
                   ),
                 ),
-                SvgPicture.asset(
-                  'assets/icons/search.svg',
-                  color: Colors.blueGrey,
-                ),
+                Icon(
+                  Icons.search,
+                  color: Color(0xFF56a89c),
+                  size: 32,
+                )
               ],
             ),
           ),
@@ -76,7 +79,7 @@ class DiseasesCategories extends StatelessWidget {
                         catTitle: 'Infectious',
                       )),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       navigateTo(context, DoctorsList());
                     },
                     child: CategoriesWidget(
@@ -142,7 +145,8 @@ class CategoriesWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               catTitle,
-              //style: TextStyle(color: Colors.white),
+
+              style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black87.withOpacity(0.7),fontSize: 15),
             ),
           )
         ],

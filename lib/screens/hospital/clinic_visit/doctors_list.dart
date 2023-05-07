@@ -1,70 +1,107 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_states.dart';
-import 'package:grad_proj/shared/components/components.dart';
 import 'package:grad_proj/widgets/doctor_list_item.dart';
-import 'package:sizer/sizer.dart';
 
 class DoctorsList extends StatelessWidget {
 
+  TextEditingController searchController= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Builder(
-      builder: (context) {
-        HospitalCubit cubit = HospitalCubit.get(context);
-        cubit.getDoctors(uId: cubit.serviceUid!);
-        return BlocConsumer<HospitalCubit,HospitalStates>(
-          listener: (context,state){
+        builder: (context) {
+          HospitalCubit cubit = HospitalCubit.get(context);
+          cubit.getDoctors(uId: cubit.serviceUid!);
+          return BlocConsumer<HospitalCubit,HospitalStates>(
+            listener: (context,state){
 
-          },
-          builder:(context,state) {
-            HospitalCubit cubit = HospitalCubit.get(context);
-            return Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Text(
-                        'Doctors List',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Color(0xFF56a89c)),
-                      ),
-                      SizedBox(
-                        height: 45,
-                      ),
-                      ConditionalBuilder(
-                        condition: cubit.doctorsList != null,
-                        builder:(context)=> ListView.separated(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, i) {
-                              return DoctorListItem(doctor: cubit.doctorsList[i],);
-                            },
-                            separatorBuilder: (context, i) => SizedBox(
-                                  height: 10,
+            },
+            builder:(context,state) {
+              HospitalCubit cubit = HospitalCubit.get(context);
+              return Scaffold(
+                body: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Text(
+                          'Doctors List',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Color(0xFF56a89c)),
+                        ),
+                        SizedBox(height: 20,),
+                        Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          height: 54,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(2, 2),
+                                    blurRadius: 4,
+                                    color: Colors.blueGrey.withOpacity(0.23))
+                              ]),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: searchController,
+                                  onChanged: (value) {
+                                    cubit.searchDoctor(name: value);
+                                  },
+                                  decoration: const InputDecoration(
+                                      hintText: 'Search',
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey, fontWeight: FontWeight.w500),
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none),
                                 ),
-                            itemCount: cubit.doctorsList.length),
-                        fallback: (context)=>Center(child: CircularProgressIndicator()),
-                      )
-                    ],
+                              ),
+                              Icon(
+                                Icons.search,
+                                color: Color(0xFF56a89c),
+                                size: 32,
+                              )
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 7,
+                        ),
+                        ConditionalBuilder(
+                          condition: cubit.doctorsList != null,
+                          builder:(context)=> ListView.separated(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, i) {
+                                return DoctorListItem(doctor: searchController.text.isNotEmpty? cubit.searchedList![i]: cubit.doctorsList[i],);
+                              },
+                              separatorBuilder: (context, i) => SizedBox(
+                                height: 10,
+                              ),
+                              itemCount: searchController.text.isNotEmpty?cubit.searchedList!.length :cubit.doctorsList.length),
+                          fallback: (context)=>Center(child: CircularProgressIndicator()),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        );
-      }
+              );
+            },
+          );
+        }
     );
   }
 }
@@ -77,9 +114,9 @@ class MyCard extends StatelessWidget {
 
   MyCard(
       {required this.imageUrl,
-      required this.title,
-      required this.subtitle,
-      required this.index});
+        required this.title,
+        required this.subtitle,
+        required this.index});
 
   @override
   Widget build(BuildContext context) {
