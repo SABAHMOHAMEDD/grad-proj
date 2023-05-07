@@ -4,8 +4,6 @@ import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/models/doctor_model.dart';
 import 'package:grad_proj/screens/hospital/clinic_visit/doctor_profile.dart';
 
-import '../shared/components/components.dart';
-
 class DoctorListItem extends StatelessWidget {
   const DoctorListItem({Key? key, required this.doctor}) : super(key: key);
   final DoctorModel doctor;
@@ -43,7 +41,15 @@ class DoctorListItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('دكتور ${doctor.name}'),
+                  InkWell(
+                      onTap: () {
+                        navigateToReplacement(context, DoctorProfile());
+                      },
+                      child: Text(
+                        'دكتور ${doctor.name}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 16),
+                      )),
                   Container(
                       width: MediaQuery.of(context).size.width - 150,
                       child: Text(
@@ -95,13 +101,13 @@ class DoctorListItem extends StatelessWidget {
           _Feature(
               text: 'مدة الانتظار : ${doctor.waitingTime} دقيقة',
               icon: FontAwesomeIcons.clock),
-          defaultButton(
-              background: Colors.red,
-              function: () {},
-              text: 'احجز الان',
-              colorText: Colors.white,
-              radius: 5,
-              width: MediaQuery.of(context).size.width / 2)
+          // defaultButton(
+          //     background: Color(0xFF56a89c),
+          //     function: () {},
+          //     text: 'احجز الان',
+          //     colorText: Colors.white,
+          //     radius: 5,
+          //     width: MediaQuery.of(context).size.width / 2)
         ],
       ),
     );
