@@ -6,23 +6,22 @@ class DioHelper {
   static init() {
     return Dio(
       BaseOptions(
-        baseUrl: 'https://api.wit.ai/',
+        baseUrl: 'https://a513-156-196-144-5.ngrok-free.app/',
         receiveDataWhenStatusError: true,
       ),
     );
   }
 
   static Future<Response> getData({
-    String url = 'message',
+    String url = 'model/parse',
     required String query,
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer WK4S4PYHTVTYZW3N63LBH7X35UPM52ZG'
     };
-    return await dio.get(
+    return await dio.post(
       url,
-      queryParameters: {'q': query},
+      data: {'text': query},
     );
   }
 

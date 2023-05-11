@@ -13,7 +13,9 @@ class DoctorsList extends StatelessWidget {
     return Builder(
         builder: (context) {
           HospitalCubit cubit = HospitalCubit.get(context);
-          cubit.getDoctors(uId: cubit.serviceUid!);
+          if(cubit.doctorsList.isEmpty) {
+            cubit.getDoctors(uId: cubit.serviceUid!);
+          }
           return BlocConsumer<HospitalCubit,HospitalStates>(
             listener: (context,state){
 

@@ -15,7 +15,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController messageController = TextEditingController();
-
+    String? msg;
     return BlocProvider(
       create: (context)=>ChatCubit()..getMessages(serviceId),
       child: Scaffold(
@@ -74,7 +74,12 @@ class ChatScreen extends StatelessWidget {
           ),
         ),
         body: BlocConsumer<ChatCubit,ChatStates>(
-          listener: (context,state){},
+          listener: (context,state){
+            ChatCubit cubit = ChatCubit.get(context);
+            if(state is ChatUserSendMessageSuccessState){
+              cubit.executeOrder(serviceId: serviceId,message: msg!,context: context);
+            }
+          },
           builder: (context,state){
             ChatCubit cubit = ChatCubit.get(context);
             return Padding(
@@ -129,7 +134,7 @@ class ChatScreen extends StatelessWidget {
                           child: MaterialButton(
                             onPressed: () {
                               // if(state is ChatBotSendMessageSuccessState){
-                              // msg = messageController.text;
+                              msg = messageController.text;
                               cubit
                                   .userSendMessage(
                                       messageController.text, serviceId)

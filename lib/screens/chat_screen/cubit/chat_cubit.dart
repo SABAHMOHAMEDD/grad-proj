@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grad_proj/models/hospital_response.dart';
+import 'package:grad_proj/screens/hospital/clinic_visit/doctors_list.dart';
+import 'package:grad_proj/shared/network/remote/dio_helper.dart';
 
 import '../../../const/const.dart';
 import '../../../models/message_model.dart';
@@ -11,6 +15,7 @@ class ChatCubit extends Cubit<ChatStates> {
   static ChatCubit get(context) => BlocProvider.of(context);
 
   String? message;
+  HospitalResponse? hospitalResponse;
 
   Future<void> userSendMessage(String message, String serviceId) async {
     MessageModel messageModel = MessageModel(
@@ -78,6 +83,7 @@ class ChatCubit extends Cubit<ChatStates> {
   List<MessageModel> messages = [];
 
   Future<void> getMessages(String serviceId) async {
+    emit(ChatGetAllMessagesSuccessState());
     print('get');
     FirebaseFirestore.instance
         .collection('users')
@@ -94,6 +100,61 @@ class ChatCubit extends Cubit<ChatStates> {
       });
       emit(ChatGetAllMessagesSuccessState());
     });
+  }
+
+  bool greet=false , search=false,book=false;
+  String? specialty;
+
+  void executeOrder({required String serviceId,required String message,required BuildContext context}) async{
+    await DioHelper.getData(query: message).then((value) {
+      hospitalResponse = HospitalResponse.fromJson(value.data);
+      print('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+      print(hospitalResponse!.intent!.name!);
+    }).catchError((onError){
+      print(onError.toString());
+    });
+
+    if(search){
+      if(hospitalResponse!.intent!.name!.contains('Department')){
+        navigateTo(context, DoctorsList());
+      }
+      else{
+        botSendMessage('عذرا هذا التخصص غير موجود , من فضلك ادخل تخصص اخر', serviceId);
+      }
+
+    }
+    if(greet == false && search == false && book == false) {
+      switch (hospitalResponse!.intent!.name!) {
+        case 'greet':
+          {
+            botSendMessage('مرحبا انا المتحدث الذكي لمستشفي الجنزوري', serviceId);
+            greet = false;
+          }
+          break;
+        case 'search':
+          {
+            botSendMessage('من فضلك ادخل تخصص الطبيب اللذي تريد البحث عنه', serviceId);
+            search = true;
+          }
+          break;
+        case 'book':
+          {
+            book = true;
+          }
+          break;
+        default: {
+          print('statements  ');
+        }
+        break;
+      }
+    }
+    // if(greet){
+    //   print('succccccccccccccccccccccccccccccccccccccccc');
+    //   botSendMessage('مرحبا انا المتحدث الذكي لمستشفي الجنزوري', serviceId);
+    //   greet = false;
+    // }
+
+
   }
 
 

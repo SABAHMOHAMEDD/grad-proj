@@ -1,9 +1,17 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/models/doctor_model.dart';
+
+import '../cubit/hospital_cubit.dart';
 
 class DoctorProfile extends StatelessWidget {
+  final DoctorModel doctor;
+  const DoctorProfile({super.key, required this.doctor});
+
+
   @override
   Widget build(BuildContext context) {
+    HospitalCubit cubit = HospitalCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -18,22 +26,23 @@ class DoctorProfile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const CircleAvatar(
+             CircleAvatar(
               radius: 75,
               backgroundColor: Color(0xFF56a89c),
+              backgroundImage: NetworkImage(doctor.image!),
             ),
             SizedBox(
               height: 17,
             ),
             Text(
-              'Doctor specialty',
+              doctor.specialty!,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.normal,
                   color: Colors.black87),
             ),
             Text(
-              'Doctor Name',
+              doctor.name!,
               style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -88,7 +97,7 @@ class DoctorProfile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
               child: Card(
                 child: Column(
-                  children: const [
+                  children: [
                     Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
@@ -108,8 +117,7 @@ class DoctorProfile extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       child: ExpandableText(
-                        'The Flutter engine has been replaced with Flutter web engine which '
-                        'is a lower level implementation of Flutter widgets and rewritten them khdjdisfnkldnsfkmfkmsfklvmsldkfmcsdlvm',
+                        doctor.bio!,
                         expandText: 'show more',
                         collapseText: 'show less',
                         linkColor: Color(0xFF56a89c),

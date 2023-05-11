@@ -8,6 +8,7 @@ import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/screens/chat_screen/chat_screen.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_states.dart';
+import 'package:grad_proj/widgets/def_floating.dart';
 
 import 'clinic_visit/diseases_cate.dart';
 
@@ -42,17 +43,7 @@ class HospitalHome extends StatelessWidget {
                 //     actions: [
                 //       Container(child: Image.network(cubit.hospital!.logo!)),
                 //     ]),
-                floatingActionButton: FloatingActionButton(
-                    backgroundColor: const Color(0xFFf08986),
-                    child: const FaIcon(FontAwesomeIcons.robot),
-                    onPressed: () {
-                      navigateTo(
-                          context,
-                          ChatScreen(
-                            serviceId: uId,
-                            ctx: context,
-                          ));
-                    }),
+                floatingActionButton: DefFloatActionButton(serviceId: uId),
 
                 bottomNavigationBar: BottomNavigationBar(
                   fixedColor: const Color(0xFF56a89c),

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/models/doctor_model.dart';
+import 'package:grad_proj/screens/hospital/clinic_visit/booking_doctor_screen.dart';
 import 'package:grad_proj/screens/hospital/clinic_visit/doctor_profile.dart';
+
+import '../shared/components/components.dart';
 
 class DoctorListItem extends StatelessWidget {
   const DoctorListItem({Key? key, required this.doctor}) : super(key: key);
@@ -28,7 +31,7 @@ class DoctorListItem extends StatelessWidget {
             children: [
               InkWell(
                 onTap: (){
-                  navigateToReplacement(context, DoctorProfile());
+                  navigateTo(context, DoctorProfile(doctor: doctor,));
                 },
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(doctor.image!),
@@ -43,7 +46,7 @@ class DoctorListItem extends StatelessWidget {
                 children: [
                   InkWell(
                       onTap: () {
-                        navigateToReplacement(context, DoctorProfile());
+                        navigateTo(context, DoctorProfile(doctor: doctor,));
                       },
                       child: Text(
                         'دكتور ${doctor.name}',
@@ -101,13 +104,15 @@ class DoctorListItem extends StatelessWidget {
           _Feature(
               text: 'مدة الانتظار : ${doctor.waitingTime} دقيقة',
               icon: FontAwesomeIcons.clock),
-          // defaultButton(
-          //     background: Color(0xFF56a89c),
-          //     function: () {},
-          //     text: 'احجز الان',
-          //     colorText: Colors.white,
-          //     radius: 5,
-          //     width: MediaQuery.of(context).size.width / 2)
+          defaultButton(
+              background: Color(0xFF56a89c),
+              function: () {
+                navigateTo(context, BookingDoctorScreen());
+              },
+              text: 'احجز الان',
+              colorText: Colors.white,
+              radius: 5,
+              width: MediaQuery.of(context).size.width / 2)
         ],
       ),
     );
