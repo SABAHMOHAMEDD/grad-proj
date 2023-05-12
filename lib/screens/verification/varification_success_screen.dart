@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import '../../const/const.dart';
-import '../../widgets/button.dart';
-import '../sign_in/signInScreen.dart';
 
 class VarificationSuccessScreen extends StatelessWidget {
   const VarificationSuccessScreen({Key? key}) : super(key: key);
@@ -90,9 +85,7 @@ class VarificationSuccessScreen extends StatelessWidget {
               SizedBox(
                 child: ElevatedButton(
                   onPressed: () {
-                    navigateToReplacement(context, SignInScreen());
-
-
+                   // navigateToReplacement(context, SignInScreen());
                   },
                   style: ButtonStyle(
                     foregroundColor:

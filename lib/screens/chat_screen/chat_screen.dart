@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/screens/chat_screen/cubit/chat_cubit.dart';
 import 'package:grad_proj/screens/chat_screen/cubit/chat_states.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
+import 'package:grad_proj/theme/mytheme.dart';
 
 import '../../const/const.dart';
 import '../../models/message_model.dart';
@@ -20,6 +21,7 @@ class ChatScreen extends StatelessWidget {
       create: (context)=>ChatCubit()..getMessages(serviceId),
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: MyTheme.primaryH,
           titleSpacing: 0,
           toolbarHeight: 75,
           title: Padding(
@@ -31,9 +33,13 @@ class ChatScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                         radius: 25,
+                        backgroundColor: Colors.grey.shade100,
                         backgroundImage:
                         NetworkImage(
-                            HospitalCubit.get(ctx).hospital!.logo!)),
+                            HospitalCubit
+                                .get(ctx)
+                                .hospital!
+                                .logo!)),
                     const CircleAvatar(
                       radius: 9,
                       backgroundColor: Colors.white,
@@ -108,6 +114,7 @@ class ChatScreen extends StatelessWidget {
                           itemCount: cubit.messages.length),
                     ),
                   ),
+
                   Container(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     decoration: BoxDecoration(
@@ -137,14 +144,14 @@ class ChatScreen extends StatelessWidget {
                               msg = messageController.text;
                               cubit
                                   .userSendMessage(
-                                      messageController.text, serviceId)
+                                  messageController.text, serviceId)
                                   .then((value) => messageController.text = '');
                             },
                             minWidth: 1,
-                            color: Colors.purple,
+                            color: MyTheme.secondaryH,
                             child: Center(
                                 child: Icon(Icons.send,
-                                    color: Colors.white, size: 18)),
+                                    color: Colors.white, size: 21)),
                           ),
                         )
                       ],
@@ -183,7 +190,7 @@ class ChatScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
         decoration: BoxDecoration(
-          color: Colors.purpleAccent.withOpacity(0.3),
+          color: MyTheme.secondaryH.withOpacity(0.3),
           borderRadius: BorderRadiusDirectional.only(
             bottomStart: Radius.circular(10),
             topEnd: Radius.circular(10),

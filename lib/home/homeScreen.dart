@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
                   BoxShadow(
                       offset: Offset(2, 2),
                       blurRadius: 4,
-                      color: Colors.purple.withOpacity(0.23))
+                      color: Colors.grey.shade300)
                 ]),
             child: Row(
               children: [
@@ -32,18 +32,18 @@ class Home extends StatelessWidget {
                   child: TextField(
                     onChanged: (value) {},
                     decoration: InputDecoration(
-                        hintText: 'search',
-                        hintStyle:
-                            TextStyle(color: Colors.purple.withOpacity(0.5)),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                            color: Colors.black54, fontWeight: FontWeight.w400),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: SvgPicture.asset(
                     'assets/icons/search.svg',
-                    color: Colors.purple.shade300,
+                    color: Color(0xFF56a89c),
                   ),
                 ),
               ],
@@ -71,7 +71,11 @@ class Home extends StatelessWidget {
                   ),
                   InkWell(
                       onTap: () {
-                        navigateTo(context, HospitalHome(uId: 'er3slW6BLMb0ZSS6oM9s',));
+                        navigateTo(
+                            context,
+                            HospitalHome(
+                              uId: 'er3slW6BLMb0ZSS6oM9s',
+                            ));
                       },
                       child: MyBox(
                         imagePath: 'assets/images/hospital.png',
@@ -103,9 +107,7 @@ class MyBox extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-              offset: Offset(2, 2),
-              blurRadius: 4,
-              color: Colors.purple.withOpacity(0.23))
+              offset: Offset(2, 2), blurRadius: 4, color: Colors.grey.shade300)
         ],
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),

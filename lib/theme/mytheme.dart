@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 class MyTheme {
   static final Color primaryColor = Colors.black;
+  static final Color primaryH = Color(0xFF56a89c);
+  static final Color secondaryH = Color(0xFFf08986);
 
   static final ThemeData LightTheme = ThemeData(
     backgroundColor: Colors.white,

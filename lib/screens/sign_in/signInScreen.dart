@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../const/const.dart';
 import '../../home/homeScreen.dart';
+import '../../shared/components/components.dart';
+import '../../theme/mytheme.dart';
 import '../../widgets/button.dart';
 import '../../widgets/text_field.dart';
 import '../sign_up/signUpScreen.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInn extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
@@ -20,6 +20,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return BlocProvider(
       create: (BuildContext context) => SignInCubit(),
       child: BlocConsumer<SignInCubit, LoginStates>(
@@ -36,22 +37,52 @@ class SignInScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.white
-            //Color(0xff192028),
-            ,
-            body: SingleChildScrollView(
-              child: SizedBox(
-                height: size.height,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 120,
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
+              body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(children: [
+              Stack(children: [
+                Container(
+                  height: size.height,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/this.jpg',
+                    ),
+                    fit: BoxFit.fitHeight,
+                  )),
+                ),
+                Positioned(
+                  top: 200,
+                  left: 11,
+                  right: 11,
+                  child: Container(
+                    height: 650,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            topLeft: Radius.circular(50)),
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 35, bottom: 10),
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(.7),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1,
+                                wordSpacing: 4,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               EditTextField(
@@ -63,7 +94,7 @@ class SignInScreen extends StatelessWidget {
                                   isEmail: true,
                                   controller: emailController),
                               SizedBox(
-                                height: 1.5,
+                                height: 10,
                               ),
                               EditTextField(
                                   ontab: () {},
@@ -74,7 +105,7 @@ class SignInScreen extends StatelessWidget {
                                   isEmail: false,
                                   controller: passwordController),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -93,71 +124,42 @@ class SignInScreen extends StatelessWidget {
                                   SizedBox(width: size.width / 20),
                                 ],
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('You don\'t have account?',
+                                      style: TextStyle(
+                                        color: Colors.black.withOpacity(.7),
+                                      )),
+                                  TextButton(
+                                    onPressed: () {
+                                      navigateToReplacement(context, SignUpp());
+                                    },
+                                    child: Text(
+                                      'SignUp Now',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyTheme.primaryH),
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                        ),
-                        Expanded(
-                          flex: 6,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Button(
-                                context: context,
-                                string: 'SIGN UP',
-                                width: 2,
-                                voidCallback: () {
-                                  HapticFeedback.lightImpact();
-
-                                  navigateToReplacement(
-                                      context, SignUpScreen());
-                                },
-                              ),
-                              SizedBox(height: size.height * .05),
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          );
+              ]),
+            ]),
+          ));
         },
       ),
     );
+
+
+
+
   }
-}
-
-void showToast({
-  required String text,
-  required ToastState state,
-}) =>
-    Fluttertoast.showToast(
-        msg: text,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: chooseToastColor(state),
-        textColor: Colors.white,
-        fontSize: 16.0);
-
-enum ToastState { SUCCESS, ERROR, WARNING }
-
-Color chooseToastColor(ToastState state) {
-  Color color;
-  switch (state) {
-    case ToastState.SUCCESS:
-      color = Colors.green;
-      break;
-
-    case ToastState.ERROR:
-      color = Colors.red;
-      break;
-
-    case ToastState.WARNING:
-      color = Colors.amber;
-      break;
-  }
-  return color;
 }

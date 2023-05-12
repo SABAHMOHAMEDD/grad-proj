@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screens/sign_up/signUpScreen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../const/const.dart';
 import 'on_board_screen.dart';
 
 class OnboardWidget extends StatelessWidget {
@@ -65,7 +63,7 @@ class OnboardWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        navigateToReplacement(context, SignUpScreen());
+                    //    navigateToReplacement(context, SignUpScreen());
                       },
                       child: Text(
                         'SKIP',

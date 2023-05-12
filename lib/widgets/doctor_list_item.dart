@@ -34,6 +34,7 @@ class DoctorListItem extends StatelessWidget {
                   navigateTo(context, DoctorProfile(doctor: doctor,));
                 },
                 child: CircleAvatar(
+                  backgroundColor: Colors.grey.shade100,
                   backgroundImage: NetworkImage(doctor.image!),
                   radius: 40,
                 ),

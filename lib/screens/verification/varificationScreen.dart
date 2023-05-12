@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grad_proj/screens/sign_up/signUpScreen.dart';
 import 'package:grad_proj/screens/verification/cubit/cubit.dart';
 
-import '../../const/const.dart';
 import 'cubit/states.dart';
 
 class varification extends StatelessWidget {
@@ -31,7 +29,7 @@ class varification extends StatelessWidget {
                         alignment: Alignment.topLeft,
                         child: GestureDetector(
                           onTap: () {
-                            navigateToReplacement(context, SignUpScreen());
+                         //   navigateToReplacement(context, SignUpScreen());
                           },
                           child: const Icon(
                             Icons.arrow_back,

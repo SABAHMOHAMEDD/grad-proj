@@ -3,12 +3,11 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grad_proj/const/const.dart';
-import 'package:grad_proj/screens/chat_screen/chat_screen.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_states.dart';
 import 'package:grad_proj/widgets/def_floating.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'clinic_visit/diseases_cate.dart';
 
@@ -304,8 +303,14 @@ class HospitalHome extends StatelessWidget {
                   ),
                 ),
               ),
-              fallback: (context) => const Scaffold(
-                  body: Center(child: CircularProgressIndicator())),
+              fallback: (context) => Scaffold(
+                  body: Center(
+                child: LoadingAnimationWidget.inkDrop(
+                  color: Color(0xFFf08986),
+                  size: 40,
+                ),
+                // CircularProgressIndicator(color: Color(0xFFf08986),)
+              )),
             );
           });
     });
@@ -330,7 +335,7 @@ class MyBox2 extends StatelessWidget {
           BoxShadow(
               offset: const Offset(2, 2),
               blurRadius: 4,
-              color: const Color(0xFF56a89c).withOpacity(0.23))
+              color: Colors.grey.shade300)
         ],
         color: Colors.white,
         // color: Colors.purple.shade50.withOpacity(0.9),
@@ -431,6 +436,14 @@ class CategoriesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 120,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              offset: const Offset(4, 4),
+              blurRadius: 4,
+              color: Colors.grey.withOpacity(0.15))
+        ],
+      ),
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Card(
         color: Colors.white,

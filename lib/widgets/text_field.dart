@@ -29,8 +29,8 @@ class EditTextField extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: BackdropFilter(
         filter: ImageFilter.blur(
-          sigmaY: 15,
-          sigmaX: 15,
+          sigmaY: 20,
+          sigmaX: 20,
         ),
         child: Container(
           height: size.width / 7,
@@ -38,7 +38,7 @@ class EditTextField extends StatelessWidget {
           alignment: Alignment.center,
           padding: EdgeInsets.only(right: size.width / 30),
           decoration: BoxDecoration(
-            color: Colors.purple.shade300.withOpacity(0.9),
+            color: Colors.grey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(15),
           ),
           child: TextField(
@@ -46,7 +46,9 @@ class EditTextField extends StatelessWidget {
             onTap: ontab(),
             controller: controller,
             style: TextStyle(
-              color: Colors.white.withOpacity(.9),
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+              color: Colors.black87.withOpacity(.5),
             ),
             cursorColor: Colors.white,
             obscureText: isPassword,
@@ -55,13 +57,15 @@ class EditTextField extends StatelessWidget {
             decoration: InputDecoration(
               prefixIcon: Icon(
                 icon,
-                color: Colors.white.withOpacity(.7),
+                color: Colors.black87.withOpacity(0.5),
               ),
               border: InputBorder.none,
               hintMaxLines: 1,
               hintText: hintText,
-              hintStyle:
-                  TextStyle(fontSize: 14, color: Colors.white.withOpacity(.5)),
+              hintStyle: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: 16,
+                  color: Colors.black87.withOpacity(0.5)),
             ),
           ),
         ),
