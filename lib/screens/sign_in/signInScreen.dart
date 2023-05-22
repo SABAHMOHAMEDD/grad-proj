@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../const/const.dart';
 import '../../home/homeScreen.dart';
 import '../../shared/components/components.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../../theme/mytheme.dart';
 import '../../widgets/button.dart';
 import '../../widgets/text_field.dart';
@@ -30,9 +31,9 @@ class SignInn extends StatelessWidget {
           }
           if (state is LoginSuccessState) {
             // CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
-            //   Navigator.pushReplacementNamed(context, Layout.RouteName);
+            //   navigateToReplacement(context, Home());
             // });
-            // navigateToReplacement(context, HomePage());
+            navigateToReplacement(context, Home());
           }
         },
         builder: (context, state) {
@@ -118,7 +119,6 @@ class SignInn extends StatelessWidget {
                                       SignInCubit.get(context).userLogin(
                                           email: emailController.text,
                                           password: passwordController.text);
-                                      navigateToReplacement(context, Home());
                                     },
                                   ),
                                   SizedBox(width: size.width / 20),

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/home/homeScreen.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 import 'package:grad_proj/screens/sign_in/cubit/cubit.dart';
+import 'package:grad_proj/screens/sign_in/signInScreen.dart';
 import 'package:grad_proj/shared/bloc_observer.dart';
 import 'package:grad_proj/shared/network/remote/dio_helper.dart';
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'j',
           ),
-          home: Home()
+          home: false? Home() : SignInn()
 
           //isLogin!? Home():  SignInScreen() //HomeScreen(),
 

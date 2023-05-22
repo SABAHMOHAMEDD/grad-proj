@@ -4,7 +4,7 @@ class UserModel {
   String? phone;
   String? uId;
   String? NId;
-  DateTime? DOB;
+  dynamic DOB;
   String? uImage;
 
   //String? image;

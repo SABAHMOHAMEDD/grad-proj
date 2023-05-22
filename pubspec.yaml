@@ -66,8 +66,6 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   line_icons: ^2.0.1
   expandable_text: ^2.3.0
-  flutter_localizations:
-    sdk: flutter
   loading_animation_widget: ^1.2.0+4
 
 

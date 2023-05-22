@@ -3,15 +3,14 @@ import 'package:flutter/services.dart';
 
 class MyTheme {
   static final Color primaryColor = Colors.black;
-  static final Color primaryH = Color(0xFF56a89c);
-  static final Color secondaryH = Color(0xFFf08986);
+  static final Color primaryH = const Color(0xFF56a89c);
+  static final Color secondaryH = const Color(0xFFf08986);
 
   static final ThemeData LightTheme = ThemeData(
     backgroundColor: Colors.white,
     fontFamily: 'j',
     primaryColor: Colors.black,
-    appBarTheme: AppBarTheme(
-        backwardsCompatibility: true,
+    appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark),
@@ -23,7 +22,7 @@ class MyTheme {
             fontSize: 24,
             color: Colors.redAccent,
             fontWeight: FontWeight.bold)),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: true,
@@ -49,8 +48,7 @@ class MyTheme {
     scaffoldBackgroundColor: Colors.white24,
     backgroundColor: Colors.black12,
     fontFamily: 'j',
-    appBarTheme: AppBarTheme(
-        backwardsCompatibility: false,
+    appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark),
@@ -59,7 +57,7 @@ class MyTheme {
         elevation: 0,
         titleTextStyle: TextStyle(
             fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500)),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         elevation: 0,
         backgroundColor: Colors.transparent,
         type: BottomNavigationBarType.fixed,

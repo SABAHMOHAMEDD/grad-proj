@@ -2,9 +2,11 @@ import 'package:booking_calendar/booking_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/const/const.dart';
+import 'package:grad_proj/models/reservation_model.dart';
 
 class BookingDoctorScreen extends StatefulWidget {
-  const BookingDoctorScreen({Key? key}) : super(key: key);
+  final String doctorId;
+  const BookingDoctorScreen({Key? key, required this.doctorId}) : super(key: key);
 
   @override
   State<BookingDoctorScreen> createState() => _BookingDoctorScreenState();
@@ -22,33 +24,48 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
     mockBookingService = BookingService(
         serviceName: 'Mock Service',
         serviceDuration: 30,
-        bookingEnd: DateTime(now.year, now.month, now.day, 19, 40),
+        bookingEnd: DateTime(now.year, now.month, now.day, 22, 40),
         bookingStart: DateTime(now.year, now.month, now.day, 8, 0));
   }
 
   Stream<dynamic>? getBookingStreamMock(
       {required DateTime end, required DateTime start}) {
-    print('${start} xxxxxxxx ${end}');
     return Stream.value([]);
   }
 
   Future<dynamic> uploadBookingMock(
       {required BookingService newBooking}) async {
-    await Future.delayed(const Duration(seconds: 3));
-    FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors').doc('Kb79I34e8kRF13vqtVpp').collection('bookings').add(
-        {
-          'bookingStart':newBooking.bookingStart,
-          'bookingEnd':newBooking.bookingEnd,
-        }).then((value) {
-      converted.add(DateTimeRange(
-          start: newBooking.bookingStart, end: newBooking.bookingEnd));
-      print('${newBooking.toJson()} has been uploaded');
-      setState(() {
+    String docId=generateRandomString(21);
+    ReservationModel reservationModel = ReservationModel(
+      rId: docId,
+      bookingEnd: newBooking.bookingEnd,
+      bookingStart: newBooking.bookingStart,
+      pDOB: userModel!.DOB,
+      pId:  userModel!.uId,
+      pName: userModel!.name,
+      pImage:  userModel!.uImage,
+      pPhone: userModel!.phone,
+    );
 
+    await Future.delayed(const Duration(seconds: 3));
+    FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors')
+        .doc('Kb79I34e8kRF13vqtVpp').collection('bookings').doc(docId).set(reservationModel.toMap()).then((value) {
+      FirebaseFirestore.instance.collection('users').doc(userModel!.uId).collection('deals')
+          .doc(docId).set(reservationModel.toMap()).then((value) {
+        converted.add(DateTimeRange(
+            start: newBooking.bookingStart, end: newBooking.bookingEnd));
+        print('${newBooking.toJson()} has been uploaded');
+        setState(() {
+
+        });
+      }).catchError((onError){
+        defToast(msg: onError.toString());
       });
     }).catchError((onError){
       defToast(msg: onError.toString());
     });
+
+
 
   }
 
@@ -58,7 +75,7 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
     ///here you can parse the streamresult and convert to [List<DateTimeRange>]
     ///take care this is only mock, so if you add today as disabledDays it will still be visible on the first load
     ///disabledDays will properly work with real data
-    FirebaseFirestore.instance..collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors').doc('Kb79I34e8kRF13vqtVpp').collection('bookings')
+    FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors').doc(widget.doctorId).collection('bookings')
     .get().then((value) {
       value.docs.forEach((element) {
         setState(() {
@@ -96,8 +113,8 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
   List<DateTimeRange> generatePauseSlots() {
     return [
       DateTimeRange(
-          start: DateTime(now.year, now.month, now.day, 12, 0),
-          end: DateTime(now.year, now.month, now.day, 13, 0))
+          start: DateTime(now.year, now.month, now.day, 1, 0),
+          end: DateTime(now.year, now.month, now.day, now.hour, now.minute))
     ];
   }
 

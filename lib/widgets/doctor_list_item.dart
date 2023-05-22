@@ -108,7 +108,7 @@ class DoctorListItem extends StatelessWidget {
           defaultButton(
               background: Color(0xFF56a89c),
               function: () {
-                navigateTo(context, BookingDoctorScreen());
+                navigateTo(context, BookingDoctorScreen(doctorId: doctor.uId!,));
               },
               text: 'احجز الان',
               colorText: Colors.white,
