@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/doctor_model.dart';
 import 'package:grad_proj/theme/mytheme.dart';
 
+import '../../../const/const.dart';
 import '../cubit/hospital_cubit.dart';
+import 'booking_doctor_screen.dart';
 
 class DoctorProfile extends StatelessWidget {
   final DoctorModel doctor;
@@ -17,7 +19,7 @@ class DoctorProfile extends StatelessWidget {
     HospitalCubit cubit = HospitalCubit.get(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyTheme.secondaryH.withOpacity(0.8),
+        backgroundColor: MyTheme.secondaryH.withOpacity(0.0),
         elevation: 0,
         leading: Icon(
           Icons.arrow_back_ios,
@@ -279,20 +281,29 @@ class DoctorProfile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 50,
-                      width: 340,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color(0xFF56a89c)),
-                      child: const Center(
-                          child: Text(
-                        'Book Now',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      )),
+                    InkWell(
+                      onTap: () {
+                        navigateTo(
+                            context,
+                            BookingDoctorScreen(
+                              doctorId: doctor.uId!,
+                            ));
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 340,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xFF56a89c)),
+                        child: const Center(
+                            child: Text(
+                          'Book Now',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )),
+                      ),
                     )
                   ],
                 )

@@ -1,17 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grad_proj/models/doctor_model.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 import 'package:intl/intl.dart';
 
 import '../../const/const.dart';
 import '../../models/reservation_model.dart';
-import '../../shared/components/components.dart';
-import 'clinic_visit/booking_doctor_screen.dart';
 import 'clinic_visit/doctor_profile.dart';
 
 class MyDealsScreen extends StatefulWidget {
@@ -60,40 +55,43 @@ class _MyDealsScreenState extends State<MyDealsScreen> {
       builder:(context)=> SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.1, 0.5],
-                  colors: [
-                    const Color(0xFF56a89c).withOpacity(0.9),
-                    const Color(0xFF56a89c).withOpacity(0.8),
-                  ],
-                ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                ),
-              ),
-              width: double.infinity,
-              height: 215,
-
-              // Image.network(cubit.hospital!.logo!,),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //       begin: Alignment.topCenter,
+            //       end: Alignment.bottomCenter,
+            //       stops: [0.1, 0.5],
+            //       colors: [
+            //         const Color(0xFF56a89c).withOpacity(0.9),
+            //         const Color(0xFF56a89c).withOpacity(0.8),
+            //       ],
+            //     ),
+            //     borderRadius: const BorderRadius.only(
+            //       bottomLeft: Radius.circular(50),
+            //     ),
+            //   ),
+            //   width: double.infinity,
+            //   height: 215,
+            //
+            //   // Image.network(cubit.hospital!.logo!,),
+            // ),
+            SizedBox(
+              height: 40,
             ),
-           ListView.separated(
-             shrinkWrap: true,
-               padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
-               physics: NeverScrollableScrollPhysics(),
-               itemBuilder: (context,i)=> Container(
-                 padding: const EdgeInsets.all(10),
-                 decoration: BoxDecoration(
-                     color: Colors.white,
-                     borderRadius: BorderRadius.circular(8),
-                     boxShadow: [
-                       BoxShadow(
-                           offset: const Offset(2, 2),
-                           blurRadius: 4,
-                           color: Colors.blueGrey.withOpacity(0.23))
+            ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, i) => Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: const Offset(2, 2),
+                                blurRadius: 4,
+                                color: Colors.blueGrey.withOpacity(0.23))
                      ]),
                  child: Column(
                    children: [
@@ -132,18 +130,18 @@ class _MyDealsScreenState extends State<MyDealsScreen> {
                                    overflow: TextOverflow.ellipsis,
                                    maxLines: 1,
                                  )),
-                             const Row(
-                               children: [
-                                 Icon(
-                                   Icons.star,
-                                   color: Colors.amber,
-                                   size: 20,
-                                 ),
-                                 Icon(
-                                   Icons.star,
-                                   color: Colors.amber,
-                                   size: 20,
-                                 ),
+                             Row(
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                        size: 20,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                        size: 20,
+                                      ),
                                  Icon(
                                    Icons.star,
                                    color: Colors.amber,

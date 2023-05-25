@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grad_proj/home/homeScreen.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 import 'package:grad_proj/screens/sign_in/cubit/cubit.dart';
 import 'package:grad_proj/screens/sign_in/signInScreen.dart';
@@ -44,15 +43,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => HospitalCubit()),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'j',
-          ),
-          home: false? Home() : SignInn()
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'j',
+        ),
+        home: SignInn(),
+        //  home: false? Home() : SignInn()
 
-          //isLogin!? Home():  SignInScreen() //HomeScreen(),
-
-          ),
+        //   home:isLogin!? Home():  SignInn() //HomeScreen(),
+      ),
     );
   }
 }

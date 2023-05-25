@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/models/reservation_model.dart';
+import 'package:grad_proj/theme/mytheme.dart';
 
 class BookingDoctorScreen extends StatefulWidget {
   final String doctorId;
@@ -121,16 +122,23 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Booking Calendar Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'Booking Calendar ',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: const Text('Booking Calendar Demo'),
+            title: const Text('Booking Calendar '),
+            backgroundColor: MyTheme.primaryH,
           ),
           body: Center(
             child: BookingCalendar(
+              selectedSlotColor: Colors.yellow.shade400,
+              bookedSlotColor: Colors.redAccent.withOpacity(0.8),
+              availableSlotColor: Colors.greenAccent.withOpacity(0.8),
+              pauseSlotColor: Colors.grey.shade400,
+              bookingButtonColor: MyTheme.primaryH,
               bookingService: mockBookingService,
               convertStreamResultToDateTimeRanges: convertStreamResultMock,
               getBookingStream: getBookingStreamMock,

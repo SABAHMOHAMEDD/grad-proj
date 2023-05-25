@@ -5,8 +5,6 @@ import 'package:grad_proj/models/doctor_model.dart';
 import 'package:grad_proj/screens/hospital/clinic_visit/booking_doctor_screen.dart';
 import 'package:grad_proj/screens/hospital/clinic_visit/doctor_profile.dart';
 
-import '../shared/components/components.dart';
-
 class DoctorListItem extends StatelessWidget {
   const DoctorListItem({Key? key, required this.doctor}) : super(key: key);
   final DoctorModel doctor;
@@ -105,15 +103,35 @@ class DoctorListItem extends StatelessWidget {
           _Feature(
               text: 'مدة الانتظار : ${doctor.waitingTime} دقيقة',
               icon: FontAwesomeIcons.clock),
-          defaultButton(
-              background: Color(0xFF56a89c),
-              function: () {
-                navigateTo(context, BookingDoctorScreen(doctorId: doctor.uId!,));
-              },
-              text: 'احجز الان',
-              colorText: Colors.white,
-              radius: 5,
-              width: MediaQuery.of(context).size.width / 2)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  navigateTo(
+                      context,
+                      BookingDoctorScreen(
+                        doctorId: doctor.uId!,
+                      ));
+                },
+                child: Container(
+                  height: 45,
+                  width: 200,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFF56a89c)),
+                  child: const Center(
+                      child: Text(
+                    'احجز الان',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  )),
+                ),
+              )
+            ],
+          )
         ],
       ),
     );

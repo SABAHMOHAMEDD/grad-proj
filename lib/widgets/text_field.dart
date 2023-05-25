@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:grad_proj/theme/mytheme.dart';
 
 class EditTextField extends StatelessWidget {
   final BuildContext context;
@@ -50,7 +51,7 @@ class EditTextField extends StatelessWidget {
               fontSize: 16,
               color: Colors.black87.withOpacity(.5),
             ),
-            cursorColor: Colors.white,
+            cursorColor: MyTheme.primaryH,
             obscureText: isPassword,
             keyboardType:
                 isEmail ? TextInputType.emailAddress : TextInputType.text,
