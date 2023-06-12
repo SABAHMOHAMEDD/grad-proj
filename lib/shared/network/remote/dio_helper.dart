@@ -6,7 +6,7 @@ class DioHelper {
   static init() {
     return Dio(
       BaseOptions(
-        baseUrl: 'https://a513-156-196-144-5.ngrok-free.app/',
+        baseUrl: 'https://1fca-156-196-31-61.ngrok-free.app/',
         receiveDataWhenStatusError: true,
       ),
     );

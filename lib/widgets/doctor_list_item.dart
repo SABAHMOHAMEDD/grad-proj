@@ -4,6 +4,7 @@ import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/models/doctor_model.dart';
 import 'package:grad_proj/screens/hospital/clinic_visit/booking_doctor_screen.dart';
 import 'package:grad_proj/screens/hospital/clinic_visit/doctor_profile.dart';
+import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
 
 class DoctorListItem extends StatelessWidget {
   const DoctorListItem({Key? key, required this.doctor}) : super(key: key);
@@ -11,6 +12,7 @@ class DoctorListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HospitalCubit cubit = HospitalCubit.get(context);
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -111,7 +113,8 @@ class DoctorListItem extends StatelessWidget {
                   navigateTo(
                       context,
                       BookingDoctorScreen(
-                        doctorId: doctor.uId!,
+                        cubit: cubit,
+                        doctor: doctor,
                       ));
                 },
                 child: Container(

@@ -28,11 +28,12 @@ class _MyDealsScreenState extends State<MyDealsScreen> {
         reservationList.add(ReservationModel.fromJson(element.data()));
 
         setState(() {
-
         });
+
         print(reservationList[0].pName);
       });
       setState(() {
+        reservationList.sort((a, b) => a.bookingStart.compareTo(b.bookingStart),);
 
       });
     }).catchError((onError){
@@ -46,12 +47,10 @@ class _MyDealsScreenState extends State<MyDealsScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    HospitalCubit.get(context).getDoctors(uId: 'er3slW6BLMb0ZSS6oM9s');
 
-    DoctorModel doctor = HospitalCubit.get(context).doctorsList[0];
 
     return ConditionalBuilder(
-      condition: reservationList != null,
+      condition: reservationList.isNotEmpty,
       builder:(context)=> SingleChildScrollView(
         child: Column(
           children: [
@@ -100,11 +99,11 @@ class _MyDealsScreenState extends State<MyDealsScreen> {
                        children: [
                          InkWell(
                            onTap: (){
-                             navigateTo(context, DoctorProfile(doctor: doctor,));
+                             // navigateTo(context, DoctorProfile(doctor: doctor,));
                            },
                            child: CircleAvatar(
                              backgroundColor: Colors.grey.shade100,
-                             backgroundImage: NetworkImage(doctor.image!),
+                             backgroundImage: NetworkImage(reservationList[i].dImg!),
                              radius: 40,
                            ),
                          ),
@@ -116,17 +115,17 @@ class _MyDealsScreenState extends State<MyDealsScreen> {
                            children: [
                              InkWell(
                                  onTap: () {
-                                   navigateTo(context, DoctorProfile(doctor: doctor,));
+                                   // navigateTo(context, DoctorProfile(doctor: doctor,));
                                  },
                                  child: Text(
-                                   'دكتور ${doctor.name}',
+                                   'دكتور ${reservationList[i].dName}',
                                    style: const TextStyle(
                                        fontWeight: FontWeight.w700, fontSize: 16),
                                  )),
                              Container(
                                  width: MediaQuery.of(context).size.width - 150,
                                  child: Text(
-                                   doctor.bio!,
+                                   reservationList[i].dBio!,
                                    overflow: TextOverflow.ellipsis,
                                    maxLines: 1,
                                  )),

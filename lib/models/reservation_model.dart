@@ -7,6 +7,11 @@ class ReservationModel {
   dynamic pDOB;
   String? pImage;
   String? rId;
+  String? dName;
+  String? dId;
+  String? dBio;
+  String? dImg;
+  String? treatment;
 
 
 
@@ -19,6 +24,11 @@ class ReservationModel {
     this.pDOB,
     this.pImage,
     this.rId,
+    this.dName,
+    this.dId,
+    this.dBio,
+    this.dImg,
+    this.treatment,
   });
 
   ReservationModel.fromJson(Map<String, dynamic> json) {
@@ -27,8 +37,14 @@ class ReservationModel {
     pId = json['pId'];
     pName = json['pName'];
     pDOB = json['pDOB'];
+    pPhone = json['pPhone'];
     pImage = json['pImage'];
     rId = json['rId'];
+    dName = json['dName'];
+    dId = json['dId'];
+    dBio = json['dBio'];
+    dImg = json['dImg'];
+    treatment = json['treatment'];
   }
 
   Map<String, dynamic> toMap() {
@@ -38,8 +54,14 @@ class ReservationModel {
       'pId': pId,
       'pName': pName,
       'pDOB': pDOB,
+      'pPhone': pPhone,
       'pImage': pImage,
       'rId': rId,
+      'dName': dName,
+      'dId': dId,
+      'dBio': dBio,
+      'dImg': dImg,
+      'treatment': treatment,
     };
   }
 }

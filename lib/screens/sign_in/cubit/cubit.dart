@@ -12,7 +12,6 @@ class SignInCubit extends Cubit<LoginStates> {
 
   static SignInCubit get(context) => BlocProvider.of(context);
 
-  UserModel? model;
   bool securedPassword = true;
   IconData Suffix = Icons.visibility;
 
@@ -34,9 +33,12 @@ class SignInCubit extends Cubit<LoginStates> {
       print(value.user?.email);
       FirebaseFirestore.instance.collection('users').doc(value.user!.uid).get().then((user) {
         userModel = UserModel.fromJson(user.data()!);
-      }).then((value2) {
         uId = value.user!.uid;
-        print(userModel!.name);
+        print('${userModel!.DOB} xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+        print('$uId zzzzzzzzzzzzzzzzzzzzzz');
+        FirebaseFirestore.instance.collection('users').doc(value.user!.uid).update({"token":token});
+      }).then((value2) {
+
         emit(LoginSuccessState(value.user!.uid));
       });
 

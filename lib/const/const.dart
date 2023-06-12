@@ -14,6 +14,8 @@ void navigateToReplacement(context, widget) {
       context, MaterialPageRoute(builder: (context) => widget));
 }
 
+
+
 String generateRandomString(int lengthOfString){
   final random = Random();
   const allChars='AaBbCcDdlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1EeFfGgHhIiJjKkL234567890';
@@ -25,8 +27,8 @@ String generateRandomString(int lengthOfString){
 }
 
 String? uId;
-UserModel? userModel;
 //String? verificationId;
+UserModel? userModel;
 
 var token;
 

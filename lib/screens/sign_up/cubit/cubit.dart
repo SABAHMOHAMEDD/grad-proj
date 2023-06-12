@@ -81,6 +81,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
           uId: value.user!.uid,
           nId: NId,
           dOB: DOB,
+
           uImage: profileImgUrl == null
               ? 'https://firebasestorage.googleapis.com/v0/b/gradproj-37b92.appspot.com/o/users%2Fprofile%2Fuserprofile.png?alt=media&token=52799077-26d4-4e3f-85df-f1d6802c5858'
               : profileImgUrl!); // save data in firestore
@@ -112,6 +113,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         uId: uId,
         uImage: uImage,
         NId: nId,
+        role: 'client',
         DOB: dOB);
 
     FirebaseFirestore.instance

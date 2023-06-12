@@ -286,7 +286,8 @@ class DoctorProfile extends StatelessWidget {
                         navigateTo(
                             context,
                             BookingDoctorScreen(
-                              doctorId: doctor.uId!,
+                              doctor: doctor,
+                              cubit: cubit,
                             ));
                       },
                       child: Container(

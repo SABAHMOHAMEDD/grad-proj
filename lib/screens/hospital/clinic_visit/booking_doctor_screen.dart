@@ -3,25 +3,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/const/const.dart';
 import 'package:grad_proj/models/reservation_model.dart';
+import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
+import 'package:grad_proj/screens/sign_in/cubit/cubit.dart';
 import 'package:grad_proj/theme/mytheme.dart';
 
+import '../../../models/doctor_model.dart';
+
 class BookingDoctorScreen extends StatefulWidget {
-  final String doctorId;
-  const BookingDoctorScreen({Key? key, required this.doctorId}) : super(key: key);
+  final DoctorModel doctor;
+  final HospitalCubit cubit;
+  const BookingDoctorScreen({Key? key, required this.doctor, required this.cubit}) : super(key: key);
 
   @override
   State<BookingDoctorScreen> createState() => _BookingDoctorScreenState();
 }
 
 class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
+
   final now = DateTime.now();
   late BookingService mockBookingService;
-
   @override
   void initState() {
     super.initState();
     // DateTime.now().startOfDay
     // DateTime.now().endOfDay
+
     mockBookingService = BookingService(
         serviceName: 'Mock Service',
         serviceDuration: 30,
@@ -44,15 +50,21 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
       pDOB: userModel!.DOB,
       pId:  userModel!.uId,
       pName: userModel!.name,
-      pImage:  userModel!.uImage,
+      pImage: userModel!.uImage,
       pPhone: userModel!.phone,
+      dImg: widget.doctor.image,
+      dBio: widget.doctor.bio,
+      dId: widget.doctor.uId,
+      dName: widget.doctor.name,
     );
 
     await Future.delayed(const Duration(seconds: 3));
     FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors')
-        .doc('Kb79I34e8kRF13vqtVpp').collection('bookings').doc(docId).set(reservationModel.toMap()).then((value) {
+        .doc(widget.doctor.uId).collection('bookings').doc(docId).set(reservationModel.toMap()).then((value) {
       FirebaseFirestore.instance.collection('users').doc(userModel!.uId).collection('deals')
           .doc(docId).set(reservationModel.toMap()).then((value) {
+        FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').update(
+            {'balance':(widget.cubit.hospital!.balance)!+(widget.doctor.price!)});
         converted.add(DateTimeRange(
             start: newBooking.bookingStart, end: newBooking.bookingEnd));
         print('${newBooking.toJson()} has been uploaded');
@@ -76,7 +88,7 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
     ///here you can parse the streamresult and convert to [List<DateTimeRange>]
     ///take care this is only mock, so if you add today as disabledDays it will still be visible on the first load
     ///disabledDays will properly work with real data
-    FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors').doc(widget.doctorId).collection('bookings')
+    FirebaseFirestore.instance.collection('serviceProviders').doc('er3slW6BLMb0ZSS6oM9s').collection('doctors').doc(widget.doctor.uId).collection('bookings')
     .get().then((value) {
       value.docs.forEach((element) {
         setState(() {
@@ -114,13 +126,14 @@ class _BookingDoctorScreenState extends State<BookingDoctorScreen> {
   List<DateTimeRange> generatePauseSlots() {
     return [
       DateTimeRange(
-          start: DateTime(now.year, now.month, now.day, 1, 0),
+          start: DateTime(now.year, now.month, now.day, 00, 1),
           end: DateTime(now.year, now.month, now.day, now.hour, now.minute))
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+    widget.cubit.hospital!.balance;
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Booking Calendar ',

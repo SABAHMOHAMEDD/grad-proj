@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/screens/hospital/cubit/hospital_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:grad_proj/shared/network/remote/dio_helper.dart';
 
 import 'const/const.dart';
 import 'firebase_options.dart';
+import 'home/homeScreen.dart';
 
 bool? isLogin;
 
@@ -20,6 +22,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  token = await FirebaseMessaging.instance.getToken();
 
   DioHelper.init();
   User? user = FirebaseAuth.instance.currentUser;
@@ -48,7 +51,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'j',
         ),
         home: SignInn(),
-        //  home: false? Home() : SignInn()
+        //  home: isLogin!? Home() : SignInn()
 
         //   home:isLogin!? Home():  SignInn() //HomeScreen(),
       ),
